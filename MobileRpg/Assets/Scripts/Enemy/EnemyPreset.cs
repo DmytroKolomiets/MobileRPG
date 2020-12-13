@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class EnemyPreset : ScriptableObject
 {
-    [SerializeField] private string monsterName;
     [SerializeField] private Sprite icon;
     [SerializeField] private int health;
     [SerializeField] private int damage;
@@ -15,8 +14,7 @@ public class EnemyPreset : ScriptableObject
     [SerializeField] private float statsMultiplier;
     [SerializeField] private EnemyAbility ability;
     [SerializeField] private GameObject model;
-
-    public string Name => monsterName;
+ 
     public Sprite Icon => icon;
     public int Health => health;
     public int Damage => damage;
