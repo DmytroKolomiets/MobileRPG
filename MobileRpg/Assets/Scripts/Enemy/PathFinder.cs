@@ -23,8 +23,6 @@ public class PathFinder
         {         
             if (GetDistance(positon, item.Index) < range && item.IsFree)
             {
-                Debug.Log(GetDistance(positon, item.Index));
-                Debug.Log(range);
                 freeSnapPointsInRange.Add(item);
             }
         }

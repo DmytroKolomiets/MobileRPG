@@ -37,17 +37,17 @@ public class Combat : MonoBehaviour
         enemy.OnEndAttack += CheckEndFight;
     }
     private void StartEnemiesAttack()
-    {
-        enemiesMover.MoveEnemies();
+    {      
         if (enemies.Count == 0)
         {
             CheckEndFight();
             return;
-        }
+        }        
         foreach (var enemy in enemies)
         {
             enemy.Attack();
-        }     
+        }
+        enemiesMover.MoveEnemies();
     }
     private void CheckEndFight()
     {

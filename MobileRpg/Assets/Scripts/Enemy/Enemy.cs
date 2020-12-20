@@ -21,19 +21,19 @@ public class Enemy : MonoBehaviour
     {
         SetStartHealth();
     }
-    public void Interact(SnapPoint snapPoint) // Think alot. maybe be interface? how behaviorController will change interaction??
-    {
-        Move(snapPoint);
-        if(CurrentSnapPoint.Index.y == preset.AvaliableAttackRange)
-        {
-            Attack();
-        }
-        else
-        {
-            IsMoved = true;
-            OnEndAttack.Invoke();
-        }
-    }
+    //public void Interact(SnapPoint snapPoint) // Think alot. maybe be interface? how behaviorController will change interaction??
+    //{
+    //    Move(snapPoint);
+    //    if (CurrentSnapPoint.Index.y == preset.AvaliableAttackRange)
+    //    {
+    //        Attack();
+    //    }
+    //    else
+    //    {
+    //        IsMoved = true;
+    //        OnEndAttack.Invoke();
+    //    }
+    //}
     public void Move(SnapPoint positionToMove)
     {
         CurrentSnapPoint.IsFree = true;
@@ -44,21 +44,24 @@ public class Enemy : MonoBehaviour
     [Button]
     public void Attack() // should be class
     {
-        if(CurrentSnapPoint.Index.y != preset.AvaliableAttackRange)
+        if (CurrentSnapPoint.Index.y != preset.AvaliableAttackRange)
         {
-            IsMoved = true;
-            OnEndAttack.Invoke();
+            StartCoroutine(Wait(() =>
+            {
+                IsMoved = true;
+                OnEndAttack.Invoke();               
+            }, 0.4f));
             return;
         }
         transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.2f).onComplete += () =>
         {
-            transform.DOScale(Vector3.one, 0.2f).onComplete += () => 
+            transform.DOScale(Vector3.one, 0.2f).onComplete += () =>
             {
                 target.TakeDamage(preset.Damage);
                 IsMoved = true;
                 OnEndAttack.Invoke();
             };
-        };       
+        };
     }
     public void TakeDamage(int damage) // should be interface(player and enemy)
     {
@@ -74,5 +77,10 @@ public class Enemy : MonoBehaviour
     private void SetStartHealth()
     {
         currentHealth = preset.Health;
+    }
+    IEnumerator Wait(System.Action action, float time)
+    {
+        yield return new WaitForSeconds(time);
+        action.Invoke();
     }
 }

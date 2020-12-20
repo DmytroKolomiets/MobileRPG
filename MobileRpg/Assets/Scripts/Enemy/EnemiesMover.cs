@@ -7,9 +7,9 @@ public class EnemiesMover : MonoBehaviour
 {
     [SerializeField] private CircularGrid grid;
     private PathFinder pathFinder = new PathFinder();
-    private List<SnapPoint> SnapPointsInAttackRange = new List<SnapPoint>();  
+    private List<SnapPoint> SnapPointsInAttackRange = new List<SnapPoint>();
     [SerializeField] private List<Enemy> enemies = new List<Enemy>();
-   
+
     [Button]
     public void MoveEnemies()
     {
@@ -22,25 +22,22 @@ public class EnemiesMover : MonoBehaviour
     {
         enemies.Add(enemy);
         enemy.OnDeath += () => { enemies.Remove(enemy); };
-    }    
+    }
     private void MoveEnemy(Enemy enemy)
-    {     
+    {
         GetSnapPointInAttakRange(enemy);
         if (SnapPointsInAttackRange.Count == 0)
-        {
-            enemy.Move(pathFinder.FindPath(enemy.CurrentSnapPoint, 
-                enemy.CurrentSnapPoint, grid.SnapPoints, enemy.Preset.MoveSpeed));
-        }
-        enemy.Move(pathFinder.FindPath(enemy.CurrentSnapPoint, 
-            SnapPointsInAttackRange[ Random.Range(0, SnapPointsInAttackRange.Count)],
-            grid.SnapPoints, enemy.Preset.MoveSpeed));        
+            return;
+        enemy.Move(pathFinder.FindPath(enemy.CurrentSnapPoint,
+            SnapPointsInAttackRange[Random.Range(0, SnapPointsInAttackRange.Count)],
+            grid.SnapPoints, enemy.Preset.MoveSpeed));
     }
     private void GetSnapPointInAttakRange(Enemy enemy)
     {
         SnapPointsInAttackRange.Clear();
         foreach (var item in grid.SnapPoints)
         {
-            if(item.IsFree && item.Index.y == enemy.Preset.AvaliableAttackRange)
+            if (item.IsFree && item.Index.y == enemy.Preset.AvaliableAttackRange)
             {
                 SnapPointsInAttackRange.Add(item);
             }
