@@ -6,14 +6,14 @@ using NaughtyAttributes;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] int damage;
     [SerializeField] Transform center;
     [SerializeField] Vector3 rotationAxis;
     [SerializeField] WeaponTrigger weaponTrigger;
+    [SerializeField] private WeaponPreset preset;
 
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<Enemy>().TakeDamage(damage);
+        other.GetComponent<Enemy>().TakeDamage(preset.Damage);
     }
     public void Hide()
     {
@@ -26,12 +26,12 @@ public class Weapon : MonoBehaviour
         gameObject.SetActive(true);
         center.eulerAngles = Vector3.zero;
         weaponTrigger.ToAimState();
-        center.DORotate(rotationAxis, 1f, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
+        center.DORotate(rotationAxis, preset.RotationTime, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
     }
     [Button]
     public void Attack() 
     {
         center.DOKill();
-        weaponTrigger.Attack(damage);
+        weaponTrigger.Attack(preset.Damage);
     }
 }

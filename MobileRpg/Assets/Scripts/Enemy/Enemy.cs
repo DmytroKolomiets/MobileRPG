@@ -7,6 +7,7 @@ using DG.Tweening;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyPreset preset;
+    public EnemyPreset Preset => preset;
     [SerializeField] private int currentHealth;
     [SerializeField] private Player target;
     public SnapPoint CurrentSnapPoint;
@@ -14,21 +15,41 @@ public class Enemy : MonoBehaviour
     public event Action OnEndAttack;
     public bool IsMoved = true;
     public event Action<string> OnDeatForQuest;
-    public int AttackRange { get; private set; }
 
 
     private void Awake()
     {
         SetStartHealth();
-        AttackRange = preset.AvaliableAttackRange;
     }
-    public void Move()
+    public void Interact(SnapPoint snapPoint) // Think alot. maybe be interface? how behaviorController will change interaction??
     {
-        
+        Move(snapPoint);
+        if(CurrentSnapPoint.Index.y == preset.AvaliableAttackRange)
+        {
+            Attack();
+        }
+        else
+        {
+            IsMoved = true;
+            OnEndAttack.Invoke();
+        }
+    }
+    public void Move(SnapPoint positionToMove)
+    {
+        CurrentSnapPoint.IsFree = true;
+        CurrentSnapPoint = positionToMove;
+        transform.position = CurrentSnapPoint.Position;
+        CurrentSnapPoint.IsFree = false;
     }
     [Button]
     public void Attack() // should be class
     {
+        if(CurrentSnapPoint.Index.y != preset.AvaliableAttackRange)
+        {
+            IsMoved = true;
+            OnEndAttack.Invoke();
+            return;
+        }
         transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.2f).onComplete += () =>
         {
             transform.DOScale(Vector3.one, 0.2f).onComplete += () => 

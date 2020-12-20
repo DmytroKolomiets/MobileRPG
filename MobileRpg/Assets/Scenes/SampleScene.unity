@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1555591419}
   enemies: []
+  enemiesMover: {fileID: 1398199044}
 --- !u!4 &50710688
 Transform:
   m_ObjectHideFlags: 0
@@ -164,7 +165,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &185154622
 GameObject:
@@ -805,10 +806,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce34181edf3731f4d9aba896be672b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
   center: {fileID: 605167652}
   rotationAxis: {x: 0, y: 360, z: 0}
   weaponTrigger: {fileID: 550923156}
+  preset: {fileID: 11400000, guid: 47e9358c43f2e6d4ea053dfeb97c43e6, type: 2}
 --- !u!1 &651687362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,7 +1193,7 @@ RectTransform:
   - {fileID: 452209254}
   - {fileID: 972763406}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1364,6 +1365,7 @@ MonoBehaviour:
   segmentsCount: 9
   rows: 4
   rowsDistance: 2
+  rend: {fileID: 0}
 --- !u!1 &972763405
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,6 +1849,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213363814}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1398199043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1398199045}
+  - component: {fileID: 1398199044}
+  m_Layer: 0
+  m_Name: EnemiesMover
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1398199044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398199043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246257bc7a81e49429613b45c75dc97a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grid: {fileID: 963194229}
+  enemies: []
+--- !u!4 &1398199045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398199043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4639132, y: -1.5741959, z: -0.65398693}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1402752070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,7 +1905,7 @@ GameObject:
   - component: {fileID: 1402752072}
   - component: {fileID: 1402752071}
   m_Layer: 0
-  m_Name: EnemiesSpaner
+  m_Name: EnemiesSpavner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1883,6 +1930,7 @@ MonoBehaviour:
   grid: {fileID: 963194229}
   combat: {fileID: 50710687}
   quest: {fileID: 1977743659}
+  enemiesMover: {fileID: 1398199044}
 --- !u!4 &1402752072
 Transform:
   m_ObjectHideFlags: 0
@@ -1944,10 +1992,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce34181edf3731f4d9aba896be672b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
   center: {fileID: 1462333081}
   rotationAxis: {x: 0, y: 360, z: 0}
   weaponTrigger: {fileID: 185154623}
+  preset: {fileID: 11400000, guid: 7c571a828ee81204895879773bf10dbc, type: 2}
 --- !u!1 &1479408899
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,7 +2074,7 @@ Transform:
   m_Children:
   - {fileID: 982415998}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1727287170
 GameObject:
@@ -2321,10 +2369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce34181edf3731f4d9aba896be672b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
   center: {fileID: 1855119587}
   rotationAxis: {x: 0, y: 360, z: 0}
   weaponTrigger: {fileID: 1213363816}
+  preset: {fileID: 11400000, guid: fa072066d32cb294d970f5139f198c69, type: 2}
 --- !u!1 &1977743658
 GameObject:
   m_ObjectHideFlags: 0

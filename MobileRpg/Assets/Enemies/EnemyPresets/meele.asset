@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6263b9924c9a54cb64e84c5c82d287, type: 3}
   m_Name: meele
   m_EditorClassIdentifier: 
-  monsterName: meele
   icon: {fileID: 0}
   health: 4
   damage: 1
   avaliableRange: 0
-  moveSpeed: 0
+  moveSpeed: 1
   movePriority: 0
   statsMultiplier: 0
   ability: {fileID: 0}

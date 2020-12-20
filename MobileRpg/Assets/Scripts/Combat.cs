@@ -10,6 +10,7 @@ public class Combat : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private List<Enemy> enemies = new List<Enemy>();
     public event Action OnNewTurn;
+    [SerializeField] private EnemiesMover enemiesMover;
     // delite enemy fromList OnDeath / add on spawn (this scripts doesnt not ork with poolling)
     private void Start()
     {
@@ -37,7 +38,8 @@ public class Combat : MonoBehaviour
     }
     private void StartEnemiesAttack()
     {
-        if(enemies.Count == 0)
+        enemiesMover.MoveEnemies();
+        if (enemies.Count == 0)
         {
             CheckEndFight();
             return;

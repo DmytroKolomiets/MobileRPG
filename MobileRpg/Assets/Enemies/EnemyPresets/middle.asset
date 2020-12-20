@@ -16,7 +16,7 @@ MonoBehaviour:
   health: 4
   damage: 2
   avaliableRange: 1
-  moveSpeed: 0
+  moveSpeed: 1
   movePriority: 0
   statsMultiplier: 0
   ability: {fileID: 0}

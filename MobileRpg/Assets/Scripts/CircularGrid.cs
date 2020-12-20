@@ -7,6 +7,7 @@ public class CircularGrid : MonoBehaviour
     [SerializeField] private int segmentsCount;
     [SerializeField] private int rows;
     [SerializeField] private float rowsDistance;
+    [SerializeField] private Renderer rend;
     private Vector3 point;
     public SnapPoint[,] SnapPoints;
     
