@@ -12,10 +12,10 @@ public class Player : MonoBehaviour
     public event Action OnDeath;
     public event Action OnEndAttack;
     [SerializeField] private Weapon weapon;
-    [SerializeField] private Text hp;
+    [SerializeField] private HealthBar healthBar;
     private void Start()
     {
-        hp.text = health.ToString();
+        healthBar.SetHealth(health);
     }
     [Button]
     public void Attack()
@@ -37,14 +37,14 @@ public class Player : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        health -= damage;     
+        health -= damage;
+        healthBar.ApplyDamge(damage);
         if (health <= 0)
         {
             OnDeath?.Invoke();
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene);
         }
-        hp.text = health.ToString();
     }  
     IEnumerator HideWeapon()
     {

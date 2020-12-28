@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public event Action OnEndAttack;
     public bool IsMoved = true;
     public event Action<string> OnDeatForQuest;
+    [SerializeField] private HealthBar healthBar;
 
 
     private void Awake()
@@ -66,6 +67,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage) // should be interface(player and enemy)
     {
         currentHealth -= damage;
+        healthBar.ApplyDamge(damage);
         if (currentHealth <= 0)
         {
             CurrentSnapPoint.IsFree = true;
@@ -77,6 +79,7 @@ public class Enemy : MonoBehaviour
     private void SetStartHealth()
     {
         currentHealth = preset.Health;
+        healthBar.SetHealth(currentHealth);
     }
     IEnumerator Wait(System.Action action, float time)
     {
